@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -eufo pipefail
+
 {{ $brews := list
      "curl"
      "gh"
@@ -5,7 +9,8 @@
      "git-lfs"
      "jq"
      "ripgrep"
-     "wget" -}}
+     "wget"
+     "zsh" -}}
 {{ $casks := list
      "bitwarden"
      "spotify"

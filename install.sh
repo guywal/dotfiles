@@ -22,8 +22,12 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 if ! exist chezmoi; then
     echo '👊  Installing chezmoi'
     brew install chezmoi
+else
+    chezmoi=chezmoi
 fi
 
-chezmoi init https://github.com/guywal/dotfiles.git
+# POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
+script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 
-echo "Run 'chezmoi diff' to see what changes would apply, then run 'chezmoi apply'"
+# exec: replace current process with chezmoi init
+exec "$chezmoi" init --apply "--source=$script_dir"

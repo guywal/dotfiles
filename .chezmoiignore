@@ -1,4 +1,6 @@
+.chezmoiscripts/**
 .DS_Store
+
+README.md
 install.sh
 test.sh
-README.md
