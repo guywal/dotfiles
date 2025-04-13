@@ -10,8 +10,7 @@ exist() {
 # install homebrew
 # https://brew.sh/
 if exist brew; then
-    log "Updating Homebrew..."
-    brew update
+    log "Homebrew already exists, continuing..."
 else
   (echo '🍺  Installing Homebrew'
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
