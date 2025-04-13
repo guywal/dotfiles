@@ -22,6 +22,7 @@ fi
 if ! exist chezmoi; then
     echo '👊  Installing chezmoi'
     brew install chezmoi
+fi
 
 chezmoi init https://github.com/guywal/dotfiles.git
 
