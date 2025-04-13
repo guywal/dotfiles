@@ -1,0 +1,21 @@
+{{ $brews := list
+     "curl"
+     "gh"
+     "git"
+     "git-lfs"
+     "jq"
+     "ripgrep"
+     "wget" -}}
+{{ $casks := list
+     "bitwarden"
+     "spotify"
+     "visual-studio-code" -}}
+
+brew bundle --file=/dev/stdin <<EOF
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end -}}
+{{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end -}}
+EOF
