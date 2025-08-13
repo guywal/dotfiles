@@ -33,29 +33,39 @@ This is a dotfiles repository managed by [chezmoi](https://www.chezmoi.io/), a t
 ## Repository Structure
 
 The repository follows chezmoi naming conventions:
-- `dot_zshrc` → `~/.zshrc` (main zsh configuration)
+- `dot_zshrc` → `~/.zshrc` (main zsh configuration with NVM support)
 - `dot_zprofile` → `~/.zprofile` (sets up Homebrew environment)
 - `install.sh` → Bootstrap script that installs Homebrew, chezmoi, and applies dotfiles
 - `test.sh` → Docker-based testing script
 - `.chezmoiignore` → Files/patterns to exclude from management
 - `.chezmoidata` → Data variables for templates
-- `run_*` scripts → Automation scripts (run once, on change, etc.)
+- `.chezmoiscripts/` → Installation automation scripts:
+  - `run_onchange_before_install_01-packages.sh.tmpl` → Homebrew packages (brew/cask)
+  - `run_onchange_before_install_02-oh-my-zsh.sh` → Oh My Zsh installation
+  - `run_onchange_before_install_03-nvm.sh` → NVM and Node.js setup
+  - `run_onchange_before_install_04-claude.sh` → Claude CLI installation
 - `.chezmoitemplates/` → Shared template files
 
 ## Architecture
 
-This is a simple dotfiles setup with two main components:
+This is a modular dotfiles setup with three main components:
 
-1. **Installation Pipeline**: `install.sh` handles the complete setup process:
+1. **Installation Pipeline**: `install.sh` handles the bootstrap process:
    - Installs Homebrew if not present
    - Installs chezmoi via Homebrew
    - Initializes and applies the dotfiles from the current directory
 
-2. **Shell Configuration**: 
-   - `dot_zprofile`: Sets up Homebrew environment paths
-   - `dot_zshrc`: Configures Oh My Zsh with the robbyrussell theme and git plugin
+2. **Automated Installation Scripts** (in `.chezmoiscripts/`):
+   - `01-packages`: Homebrew packages and casks via templated brew bundle
+   - `02-oh-my-zsh`: Oh My Zsh installation (unattended)
+   - `03-nvm`: NVM installation with latest LTS Node.js
+   - `04-claude`: Claude CLI installation via npm
 
-The setup is designed to be idempotent - running `install.sh` multiple times is safe and will skip already installed components.
+3. **Shell Configuration**: 
+   - `dot_zprofile`: Sets up Homebrew environment paths
+   - `dot_zshrc`: Configures Oh My Zsh with NVM support, robbyrussell theme and git plugin
+
+The setup is designed to be idempotent - all installation scripts check for existing installations and skip if already present.
 
 ## Common Workflows
 
