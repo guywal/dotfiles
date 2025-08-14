@@ -50,6 +50,12 @@ sudo pmset -a displaysleep 10
 sudo pmset -a sleep 10
 sudo pmset -a disksleep 10
 
+# Login items
+if [ -d "/Applications/Rectangle.app" ]; then
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Rectangle.app", hidden:false}' 2>/dev/null || true
+    echo "✅ Added Rectangle to login items"
+fi
+
 echo "✅ macOS settings configured. Restarting affected applications..."
 
 # Restart affected applications
