@@ -77,6 +77,9 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# Load chezmoi completion
+source <(chezmoi completion zsh)
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
